@@ -1,0 +1,18 @@
+<!-- app/templates/dashboard.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the CRM Dashboard</h2>
+    <p>Use the navigation above to view or add leads.</p>
+
+    <section>
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="/leads">View All Leads</a></li>
+            <li><a href="/leads/add">Add New Lead</a></li>
+        </ul>
+    </section>
+{% endblock %}

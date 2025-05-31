@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Lead{% endblock %}
+
+{% block content %}
+<h2>Delete Lead</h2>
+
+<p>Are you sure you want to delete <strong>{{ lead.name }}</strong>?</p>
+
+<form method="post" action="/leads/{{ lead.id }}/delete">
+    <button type="submit" style="background-color: #d9534f; color: white;">Yes, Delete</button>
+    <a href="/leads" style="margin-left: 1rem;">Cancel</a>
+</form>
+{% endblock %}

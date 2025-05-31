@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Lead{% endblock %}
+
+{% block content %}
+<h2>Edit Lead</h2>
+
+{% if message %}
+    <p style="color: green;">{{ message }}</p>
+{% endif %}
+
+<form method="post" action="/leads/{{ lead.id }}/edit">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value="{{ lead.name }}" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" value="{{ lead.email }}" required><br><br>
+
+    <label for="phone">Phone:</label><br>
+    <input type="text" id="phone" name="phone" value="{{ lead.phone }}"><br><br>
+
+    <button type="submit">Update Lead</button>
+</form>
+
+<br>
+<a href="/leads">Back to list</a>
+{% endblock %}

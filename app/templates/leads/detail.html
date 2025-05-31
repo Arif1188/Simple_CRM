@@ -1,0 +1,15 @@
+<!-- app/templates/leads/detail.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Lead Details{% endblock %}
+
+{% block content %}
+    <h2>Lead Details</h2>
+
+    <p><strong>Name:</strong> {{ lead.name }}</p>
+    <p><strong>Email:</strong> {{ lead.email }}</p>
+    <p><strong>Phone:</strong> {{ lead.phone or "N/A" }}</p>
+
+    <a href="/leads">← Back to Leads List</a>
+{% endblock %}

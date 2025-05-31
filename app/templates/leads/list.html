@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Leads List{% endblock %}
+
+{% block content %}
+    <h2>Leads</h2>
+
+    {% if leads %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                <tr>
+                    <td>{{ lead.name }}</td>
+                    <td>{{ lead.email }}</td>
+                    <td>{{ lead.phone or "N/A" }}</td>
+                    <td>
+                        <a href="/leads/{{ lead.id }}">View</a> |
+                        <a href="/leads/{{ lead.id }}/edit">Edit</a> |
+                        <a href="/leads/{{ lead.id }}/delete" style="color: red;">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No leads found. <a href="/leads/add">Add a lead</a>.</p>
+    {% endif %}
+{% endblock %}

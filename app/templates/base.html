@@ -1,0 +1,96 @@
+<!-- app/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Simple CRM{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+        /* Extra styles to enhance the UI */
+        body {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+            color: #f0f0f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: rgba(30, 30, 60, 0.9);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #a0c9ff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #3f51b5;
+            color: white;
+            box-shadow: 0 0 8px #3f51b5;
+        }
+
+        main.container {
+            flex: 1;
+            background: white;
+            color: #333;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(30, 30, 60, 0.9);
+            color: #a0a0b0;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Simple CRM</h1>
+        <nav>
+            <a href="/" class="{% if request.url.path == '/' %}active{% endif %}">Dashboard</a>
+            <a href="/leads" class="{% if request.url.path.startswith('/leads') and request.url.path != '/leads/add' %}active{% endif %}">Leads</a>
+            <a href="/leads/add" class="{% if request.url.path == '/leads/add' %}active{% endif %}">Add Lead</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        &copy; {{ current_year }} Simple CRM — Made with ❤️
+    </footer>
+
+</body>
+</html>
