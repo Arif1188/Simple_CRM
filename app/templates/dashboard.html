@@ -15,4 +15,75 @@
             <li><a href="/leads/add">Add New Lead</a></li>
         </ul>
     </section>
+
+    <section style="margin-top: 2rem;">
+        <h3>Leads Overview</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex: 1;">
+                <canvas id="leadsByStatus" width="350" height="250"></canvas>
+            </div>
+            <div style="flex: 1;">
+                <canvas id="monthlyLeads" width="350" height="250"></canvas>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Example data (replace with real values using Jinja if available)
+    const leadsByStatusData = {
+        labels: ["New", "Contacted", "Qualified", "Lost", "Won"],
+        datasets: [{
+            label: 'Leads by Status',
+            data: [12, 19, 7, 3, 5],
+            backgroundColor: [
+                '#3f51b5', '#2196f3', '#4caf50', '#f44336', '#ff9800'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const leadsByStatusConfig = {
+        type: 'doughnut',
+        data: leadsByStatusData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'bottom' }
+            }
+        }
+    };
+
+    const monthlyLeadsData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        datasets: [{
+            label: 'Leads per Month',
+            data: [5, 9, 13, 8, 12, 7],
+            fill: false,
+            borderColor: "#3f51b5",
+            backgroundColor: "#3f51b5",
+            tension: 0.3
+        }]
+    };
+
+    const monthlyLeadsConfig = {
+        type: 'line',
+        data: monthlyLeadsData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'bottom' }
+            }
+        }
+    };
+
+    window.addEventListener('DOMContentLoaded', function () {
+        const statusCtx = document.getElementById('leadsByStatus').getContext('2d');
+        new Chart(statusCtx, leadsByStatusConfig);
+
+        const monthlyCtx = document.getElementById('monthlyLeads').getContext('2d');
+        new Chart(monthlyCtx, monthlyLeadsConfig);
+    });
+</script>
 {% endblock %}

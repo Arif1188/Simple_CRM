@@ -1,29 +1,21 @@
 from locust import HttpUser, task, between
-import random
-import string
 
-class LeadUser(HttpUser):
-    wait_time = between(1, 3)  # wait between 1-3 seconds between tasks
-    
-def random_email():
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=8)) + "@example.com"
+class CRMUser(HttpUser):
+    wait_time = between(1, 3)
+    host = "http://16.170.231.182:8000"  # Your EC2 public IP and port
 
-class LeadUser(HttpUser):
-    wait_time = between(1, 2)
+    @task
+    def view_home(self):
+        self.client.get("/")
 
-    @task(3)  # weight of this task
-    def list_leads(self):
-        self.client.get("/leads")
+    @task
+    def view_catalogue(self):
+        self.client.get("/catalogue")
 
-    @task(1)
-    def add_lead(self):
-        self.client.post("/leads/add", data={
-            "name": "Load Test User",
-            "email": random_email(),
-            "phone": "1234567890"
+    @task
+    def create_lead(self):
+        self.client.post("/leads", json={
+            "name": "Test",
+            "email": "test@example.com",
+            "message": "Locust test"
         })
-
-    @task(2)
-    def get_lead_detail(self):
-        # Assuming lead with id=1 exists
-        self.client.get("/leads/1")

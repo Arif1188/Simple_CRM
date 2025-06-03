@@ -1,24 +1,24 @@
-<!-- app/templates/leads/form.html -->
+    <!-- app/templates/leads/form.html -->
 
-{% extends "base.html" %}
+    {% extends "base.html" %}
 
-{% block title %}Add New Lead{% endblock %}
+    {% block title %}Add New Lead{% endblock %}
 
-{% block content %}
-    <h2>Add New Lead</h2>
+    {% block content %}
+        <h2>Add New Lead</h2>
 
-    <form action="/leads/add" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <form action="/leads/add" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone">
 
-        <button type="submit">Add Lead</button>
-    </form>
+            <button type="submit">Add Lead</button>
+        </form>
 
-    <a href="/leads">← Back to Leads List</a>
-{% endblock %}
+        <a href="/leads">← Back to Leads List</a>
+    {% endblock %}

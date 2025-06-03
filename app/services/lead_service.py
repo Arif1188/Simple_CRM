@@ -16,19 +16,15 @@ def get_lead_by_id(db: Session, lead_id: int):
 
 
 def create_lead(db: Session, lead_data: LeadCreate):
-    lead = Lead(
-        name=lead_data.name,
-        email=lead_data.email,
-        phone=lead_data.phone,
-    )
     try:
+        lead = Lead(**lead_data.model_dump())  # use .dict() if on Pydantic v1
+        db.add(lead)
         db.commit()
-    except IntegrityError:
+        db.refresh(lead)
+        return lead
+    except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=400, detail="Lead with this email already exists")
-
-    db.refresh(lead)
-    return lead
+        raise e
 
 def update_lead(db: Session, lead_id: int, lead_data: LeadCreate): 
     lead = db.query(Lead).filter(Lead.id == lead_id).first()
